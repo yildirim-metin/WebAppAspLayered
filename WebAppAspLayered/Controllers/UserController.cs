@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using WebAppAspLayered.BLL.Services;
 using WebAppAspLayered.DL.Entities;
 using WebAppAspLayered.Mappers;
@@ -62,6 +65,18 @@ public class UserController : Controller
         try
         {
             User? user = _userService.Login(form.Email, form.Password);
+
+            ClaimsPrincipal claims = new(new ClaimsIdentity(
+            [
+                new Claim(ClaimTypes.Sid, user.Id.ToString()),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Role, user.Role.ToString()),
+            ]));
+
+            HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claims, new AuthenticationProperties
+            {
+                IsPersistent = false
+            });
         }
         catch (Exception ex)
         {
@@ -71,5 +86,13 @@ public class UserController : Controller
         }
 
         return RedirectToAction("Index", "Home");
+    }
+
+    [Authorize]
+    [HttpPost]
+    public IActionResult Logout()
+    {
+        HttpContext.SignOutAsync();
+        return RedirectToAction("Login", "User");
     }
 }
