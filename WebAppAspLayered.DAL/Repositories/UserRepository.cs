@@ -6,7 +6,7 @@ namespace WebAppAspLayered.DAL.Repositories;
 
 public class UserRepository
 {
-    private readonly string _connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=DemoAspClean.Db;Trusted_Connection=True;";
+    private readonly string _connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=WebAppAspLayered_DB;Trusted_Connection=True;";
 
     public void Add(User entity)
     {
