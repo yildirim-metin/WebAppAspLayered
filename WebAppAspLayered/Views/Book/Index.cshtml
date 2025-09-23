@@ -13,6 +13,9 @@
     <thead>
         <tr>
             <th>
+                FAV
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.ISBN)
             </th>
             <th>
@@ -27,6 +30,11 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                <a asp-action="AddFavorite">
+                   <img src="assets/star-uncheck.png" style="width:2rem" />
+                </a>
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ISBN)
             </td>

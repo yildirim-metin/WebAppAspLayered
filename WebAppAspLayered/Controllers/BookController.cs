@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebAppAspLayered.BLL.Services;
 using WebAppAspLayered.Mappers;
 using WebAppAspLayered.Models.Books;
@@ -17,5 +18,12 @@ public class BookController : Controller
     public IActionResult Index()
     {
         return View(_bookService.GetAll().ToBookDtos());
+    }
+
+    [HttpPost]
+    public IActionResult AddFavorite()
+    {
+
+        return View();
     }
 }

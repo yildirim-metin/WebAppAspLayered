@@ -39,6 +39,7 @@ public class BookRepository
             ISBN = (string)reader["ISBN"],
             Name = (string)reader["Name"],
             Author = (string)reader["Author"],
+            IsFav = (bool)reader["IsFav"],
         };
     }
 }
