@@ -43,7 +43,7 @@ public class BookRepository
         return books;
     }
 
-    public int Count()
+    public int CountAny(BookFilterDal? filter)
     {
         using SqlConnection connection = new(_connectionString);
         using SqlCommand command = connection.CreateCommand();
@@ -51,7 +51,14 @@ public class BookRepository
         command.CommandText = """
             SELECT COUNT(*)
             FROM Book
+            WHERE (ISBN LIKE @isbn OR @isbn IS NULL)
+            AND (Name LIKE @name OR @name IS NULL)
             """;
+
+        command.Parameters.AddWithValue("@isbn",
+            filter?.ISBN != null ? $"%{filter.ISBN}%" : DBNull.Value);
+        command.Parameters.AddWithValue("@name",
+            filter?.Name != null ? $"%{filter.Name}%" : DBNull.Value);
 
         connection.Open();
         return (int) command.ExecuteScalar();

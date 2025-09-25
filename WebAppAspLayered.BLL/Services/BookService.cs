@@ -19,8 +19,8 @@ public class BookService
         return _repository.GetAll(page, filter?.ToBookFilterDal());
     }
 
-    public int Count()
+    public int CountAny(BookFilterBll? filter)
     {
-        return _repository.Count();
+        return _repository.CountAny(filter?.ToBookFilterDal());
     }
 }
