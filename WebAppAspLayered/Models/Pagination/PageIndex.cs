@@ -1,4 +1,4 @@
-﻿namespace WebAppAspLayered.Models;
+﻿namespace WebAppAspLayered.Models.Pagination;
 
 public class PageIndex<T> where T : class
 {

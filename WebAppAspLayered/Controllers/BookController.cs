@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using WebAppAspLayered.BLL.Services;
 using WebAppAspLayered.Mappers;
-using WebAppAspLayered.Models;
 using WebAppAspLayered.Models.Books;
+using WebAppAspLayered.Models.Pagination;
 
 namespace WebAppAspLayered.Controllers;
 
