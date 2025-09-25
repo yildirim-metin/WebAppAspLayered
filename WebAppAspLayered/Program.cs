@@ -21,8 +21,12 @@ builder.Services.AddDistributedMemoryCache();
 
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<UserService>();
+
 builder.Services.AddScoped<BookRepository>();
 builder.Services.AddScoped<BookService>();
+
+builder.Services.AddScoped<CartRepository>();
+builder.Services.AddScoped<CartService>();
 
 var app = builder.Build();
 

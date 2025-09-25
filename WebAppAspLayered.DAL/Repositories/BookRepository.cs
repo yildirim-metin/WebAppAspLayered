@@ -4,10 +4,8 @@ using WebAppAspLayered.DL.Entities;
 
 namespace WebAppAspLayered.DAL.Repositories;
 
-public class BookRepository
+public class BookRepository : BaseRepository
 {
-    private readonly string _connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=WebAppAspLayered_DB;Trusted_Connection=True;";
-
     public List<Book> GetAll(int page, BookFilterDal? filter)
     {
         using SqlConnection connection = new(_connectionString);

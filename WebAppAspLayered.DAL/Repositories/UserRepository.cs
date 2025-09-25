@@ -4,10 +4,8 @@ using WebAppAspLayered.DL.Enums;
 
 namespace WebAppAspLayered.DAL.Repositories;
 
-public class UserRepository
+public class UserRepository : BaseRepository
 {
-    private readonly string _connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=WebAppAspLayered_DB;Trusted_Connection=True;";
-
     public void Add(User entity)
     {
         using (SqlConnection connection = new SqlConnection(_connectionString))
