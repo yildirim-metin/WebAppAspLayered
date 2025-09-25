@@ -90,7 +90,6 @@ public class UserController : Controller
     }
 
     [Authorize]
-    [HttpPost]
     public IActionResult Logout()
     {
         HttpContext.SignOutAsync();

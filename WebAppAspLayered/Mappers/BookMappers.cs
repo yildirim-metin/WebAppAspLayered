@@ -10,6 +10,7 @@ public static class BookMappers
     {
         return new BookDto()
         {
+            Id = book.Id,
             ISBN = book.ISBN,
             Name = book.Name,
             Author = book.Author,

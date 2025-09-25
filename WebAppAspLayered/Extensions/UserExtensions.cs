@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using System.Security.Principal;
 using WebAppAspLayered.DL.Enums;
 
 namespace WebAppAspLayered.Extensions;
@@ -15,7 +16,7 @@ public static class UserExtensions
         return Enum.Parse<UserRole>(principal.FindFirst(ClaimTypes.Role)!.Value);
     }
 
-    public static bool IsConnected(this ClaimsPrincipal principal)
+    public static bool IsConnected(this IPrincipal principal)
     {
         return principal.Identity!.IsAuthenticated;
     }
