@@ -1,0 +1,61 @@
+﻿@using WebAppAspLayered.Models.Books
+@model PageIndex<BookDto>
+
+@if(Model.Items.Count < Model.TotalItems)
+{
+    int startRange = Model.Page < 4 ? 0 : Model.Page - 3;
+    int endRange = Model.Page > Model.TotalPages - 4 ? Model.TotalPages : Model.Page + 3;
+
+    <nav>
+        <ul class="pagination">
+            @if(Model.Page > 0)
+            {
+                <li class="page-item">
+                    <a class="page-link"
+                       asp-controller="Book"
+                       asp-action="Index"
+                       asp-route-page="@(Model.Page - 1)">
+                        Précédent
+                    </a>
+                </li>
+            }
+
+            @for(int i = startRange; i <= endRange; i++)
+            {
+                @if(i == Model.Page)
+                {
+                    <li class="page-item active">
+                        <a class="page-link"
+                           asp-controller="Book"
+                           asp-action="Index"
+                           asp-route-page="@i">
+                            @(i + 1)
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link"
+                           asp-controller="Book"
+                           asp-action="Index"
+                           asp-route-page="@i">
+                            @(i + 1)
+                        </a>
+                    </li>
+                }
+            }
+            @if (Model.Page < Model.TotalPages)
+            {
+                <li class="page-item">
+                    <a class="page-link"
+                       asp-controller="Book"
+                       asp-action="Index"
+                       asp-route-page="@(Model.Page + 1)">
+                        Suivant
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+}

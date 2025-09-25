@@ -12,8 +12,13 @@ public class BookService
         _repository = repository;
     }
 
-    public List<Book> GetAll()
+    public List<Book> GetAll(int page)
     {
-        return _repository.GetAll();
+        return _repository.GetAll(page);
+    }
+
+    public int Count()
+    {
+        return _repository.Count();
     }
 }

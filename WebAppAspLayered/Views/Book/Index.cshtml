@@ -1,4 +1,5 @@
-﻿@model IEnumerable<WebAppAspLayered.Models.Books.BookDto>
+﻿@using WebAppAspLayered.Models.Books
+@model PageIndex<BookDto>
 
 @{
     ViewData["Title"] = "Books page";
@@ -9,47 +10,58 @@
 <p>
     <a asp-action="Create">Add a book</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                FAV
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ISBN)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Author)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                <a asp-action="AddFavorite">
-                   <img src="assets/star-uncheck.png" style="width:2rem" />
-                </a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ISBN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
+
+
+@if (Model.Items.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    FAV
+                </th>
+                <th>
+                    @Html.DisplayNameFor(page => page.Items[0].ISBN)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(page => page.Items[0].Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(page => page.Items[0].Author)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model.Items) {
+            <tr>
+                <td>
+                    <a asp-action="AddFavorite">
+                       <img src="assets/star-uncheck.png" style="width:2rem" />
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ISBN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+   
+    @await Html.PartialAsync("Partials/_Pagination", Model)
 }
-    </tbody>
-</table>
+else
+{
+    <p>Pas de produit trouvé!</p>
+}
