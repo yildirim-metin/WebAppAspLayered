@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebAppAspLayered.Models.Users;
 
-public class LoginFormDto
+public record LoginFormDto
 {
     [Required]
     [DisplayName("Email")]

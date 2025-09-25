@@ -1,6 +1,6 @@
 ﻿namespace WebAppAspLayered.DAL.Models;
 
-public class BookFilterDal
+public record BookFilterDal
 {
     public string? ISBN { get; set; }
     public string? Name { get; set; }

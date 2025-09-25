@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebAppAspLayered.Models.Users;
 
-public class RegisterFormDto
+public record RegisterFormDto
 {
     [Required]
     [MaxLength(150)]

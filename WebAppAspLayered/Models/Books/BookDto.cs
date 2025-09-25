@@ -1,6 +1,6 @@
 ﻿namespace WebAppAspLayered.Models.Books;
 
-public class BookDto
+public record BookDto
 {
     public string ISBN { get; set; } = null!;
     public string Name { get; set; } = null!;

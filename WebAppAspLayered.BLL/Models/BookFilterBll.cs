@@ -1,6 +1,6 @@
 ﻿namespace WebAppAspLayered.BLL.Models;
 
-public class BookFilterBll
+public record BookFilterBll
 {
     public string? ISBN { get; set; }
     public string? Name { get; set; }
