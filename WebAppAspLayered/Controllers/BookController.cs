@@ -22,10 +22,13 @@ public class BookController : Controller
         PageIndex<BookDto> p = new()
         {
             Items = books,
-            Page = page,
-            TotalItems = _bookService.Count(),
-            TotalPages = (int)Math.Ceiling(_bookService.Count() / 5f) - 1,
-
+            Meta = new()
+            {
+                ItemsCount = books.Count,
+                Page = page,
+                TotalItems = _bookService.Count(),
+                TotalPages = (int)Math.Ceiling(_bookService.Count() / 5f) - 1,
+            }
         };
         return View(p);
     }

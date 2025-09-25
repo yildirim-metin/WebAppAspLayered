@@ -1,7 +1,7 @@
 ﻿@using WebAppAspLayered.Models.Books
-@model PageIndex<BookDto>
+@model PageIndexMeta
 
-@if(Model.Items.Count < Model.TotalItems)
+@if(Model.ItemsCount < Model.TotalItems)
 {
     int startRange = Model.Page < 4 ? 0 : Model.Page - 3;
     int endRange = Model.Page > Model.TotalPages - 4 ? Model.TotalPages : Model.Page + 3;
