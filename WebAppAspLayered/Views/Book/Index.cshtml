@@ -1,6 +1,6 @@
 ﻿@using WebAppAspLayered.Models.Books
 @using WebAppAspLayered.Models.Pagination
-@model PageIndex<BookDto>
+@model (PageIndex<BookDto> PageIndex, BookFilterFormDto Filter)
 
 @{
     ViewData["Title"] = "Books page";
@@ -8,12 +8,33 @@
 
 <h1>Books</h1>
 
+<form asp-action="Index" asp-controller="Book" method="get">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <label id="ISBN">ISBN</label>
+                @* name attribute should the property name of BookFilterFormDto <ISBN>*@
+                <input for="ISBN" name="ISBN" value="@Model.Filter.ISBN" />
+            </div>
+
+            <div class="col">
+                <label id="Name">Name</label>
+                @* name attribute should the property name of BookFilterFormDto <Name>*@
+                <input for="Name" name="Name" value="@Model.Filter.Name" />
+            </div>
+
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </div>
+</form>
+
 <p>
     <a asp-action="Create">Add a book</a>
 </p>
 
-
-@if (Model.Items.Count > 0)
+@if (Model.PageIndex.Items.Count > 0)
 {
     <table class="table">
         <thead>
@@ -22,19 +43,19 @@
                     FAV
                 </th>
                 <th>
-                    @Html.DisplayNameFor(page => page.Items[0].ISBN)
+                    @Html.DisplayNameFor(model => model.PageIndex.Items[0].ISBN)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(page => page.Items[0].Name)
+                    @Html.DisplayNameFor(model => model.PageIndex.Items[0].Name)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(page => page.Items[0].Author)
+                    @Html.DisplayNameFor(model => model.PageIndex.Items[0].Author)
                 </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-    @foreach (var item in Model.Items) {
+    @foreach (var item in Model.PageIndex.Items) {
             <tr>
                 <td>
                     <a asp-action="AddFavorite">
@@ -60,7 +81,7 @@
         </tbody>
     </table>
    
-    @await Html.PartialAsync("Partials/_Pagination", Model.Meta)
+    @await Html.PartialAsync("Partials/_Pagination", Model.PageIndex.Meta)
 }
 else
 {

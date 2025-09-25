@@ -1,4 +1,6 @@
-﻿using WebAppAspLayered.DAL.Repositories;
+﻿using WebAppAspLayered.BLL.Mappers;
+using WebAppAspLayered.BLL.Models;
+using WebAppAspLayered.DAL.Repositories;
 using WebAppAspLayered.DL.Entities;
 
 namespace WebAppAspLayered.BLL.Services;
@@ -12,9 +14,9 @@ public class BookService
         _repository = repository;
     }
 
-    public List<Book> GetAll(int page)
+    public List<Book> GetAll(int page, BookFilterBll? filter)
     {
-        return _repository.GetAll(page);
+        return _repository.GetAll(page, filter?.ToBookFilterDal());
     }
 
     public int Count()

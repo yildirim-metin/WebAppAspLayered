@@ -16,9 +16,9 @@ public class BookController : Controller
         _bookService = service;
     }
 
-    public IActionResult Index(int page = 0)
+    public IActionResult Index(int page = 0, [FromQuery]BookFilterFormDto? filter = null)
     {
-        List<BookDto> books = _bookService.GetAll(page).ToBookDtos();
+        List<BookDto> books = _bookService.GetAll(page, filter?.ToBookFilterBll()).ToBookDtos();
         PageIndex<BookDto> p = new()
         {
             Items = books,
@@ -30,7 +30,7 @@ public class BookController : Controller
                 TotalPages = (int)Math.Ceiling(_bookService.Count() / 5f) - 1,
             }
         };
-        return View(p);
+        return View((p, filter));
     }
 
     [HttpPost]
