@@ -71,12 +71,13 @@ public class UserController : Controller
                 new Claim(ClaimTypes.Sid, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Role, user.Role.ToString()),
-            ]));
+            ], CookieAuthenticationDefaults.AuthenticationScheme));
 
-            HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claims, new AuthenticationProperties
-            {
-                IsPersistent = false
-            });
+            HttpContext.SignInAsync(claims);
+            //HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claims, new AuthenticationProperties
+            //{
+            //    IsPersistent = false
+            //});
         }
         catch (Exception ex)
         {

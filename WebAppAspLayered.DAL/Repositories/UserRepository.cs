@@ -13,7 +13,7 @@ public class UserRepository
         using (SqlConnection connection = new SqlConnection(_connectionString))
         using (SqlCommand command = connection.CreateCommand())
         {
-            command.CommandText = @$"INSERT INTO User (EMAIL,PASSWORD,ROLE)
+            command.CommandText = @$"INSERT INTO [User] (Email, Password, Role)
                                         VALUES(@email,@password,@role)";
 
             command.Parameters.AddWithValue("@email", entity.Email);
@@ -33,8 +33,8 @@ public class UserRepository
         using (SqlConnection connection = new SqlConnection(_connectionString))
         using (SqlCommand command = connection.CreateCommand())
         {
-            command.CommandText = @$"SELECT * FROM User
-                                         WHERE EMAIL like @email";
+            command.CommandText = @$"SELECT * FROM [User]
+                                         WHERE Email like @email";
 
             command.Parameters.AddWithValue("@email", email);
 
@@ -58,7 +58,7 @@ public class UserRepository
         {
             command.CommandText = @$"SELECT 
                                          cast(CASE WHEN EXISTS (
-                                            SELECT 1 FROM User WHERE EMAIL = @email) 
+                                            SELECT 1 FROM [User] WHERE Email = @email) 
                                              THEN 1 
                                              ELSE 0 
                                          END as bit) AS isExisting;";
