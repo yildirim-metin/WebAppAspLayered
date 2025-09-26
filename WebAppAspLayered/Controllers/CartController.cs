@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Cors.Infrastructure;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿using Microsoft.AspNetCore.Mvc;
 using WebAppAspLayered.BLL.Services;
 using WebAppAspLayered.DL.Entities;
 using WebAppAspLayered.Extensions;
