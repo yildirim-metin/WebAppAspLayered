@@ -1,4 +1,5 @@
-﻿using WebAppAspLayered.DAL.Repositories;
+﻿using WebAppAspLayered.BLL.Models;
+using WebAppAspLayered.DAL.Repositories;
 using WebAppAspLayered.DL.Entities;
 
 namespace WebAppAspLayered.BLL.Services;
@@ -15,5 +16,10 @@ public class CartService
     public Cart GetCartByUserId(int userId)
     {
         return _repository.GetCartByUserId(userId);
+    }
+
+    public void AddItem(CartItem cartItem)
+    {
+        _repository.AddItem(cartItem);
     }
 }

@@ -1,6 +1,6 @@
-﻿CREATE TABLE [dbo].[Cart]
-(
-	[Id] INT NOT NULL PRIMARY KEY, 
-    [UserId] INT NOT NULL, 
-    CONSTRAINT [FK_Cart_User] FOREIGN KEY (Id) REFERENCES [User]([Id]),
-)
+CREATE TABLE [dbo].[Cart] (
+    [Id]     INT NOT NULL IDENTITY,
+    [UserId] INT NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_Cart_User] FOREIGN KEY ([UserId]) REFERENCES [User](Id)
+);
